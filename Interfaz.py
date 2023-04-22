@@ -13,7 +13,6 @@ cont = 0
 
 class Interfaz():
     
-
     def __init__(self):
         self.root = tk.Tk()
         self.pagina_inicio()
@@ -114,6 +113,7 @@ class Interfaz():
         self.contenedor3.config(bg="#B8B8B8",font=("Inter",10),width=20,height=2)
         self.contenedor3.place(x=20,y=300)
 
+
     def pagina_segunda(self):
 
         self.root1 = tk.Tk()
@@ -166,6 +166,8 @@ class Interfaz():
         self.dato7.place(x=200,y=180)
 
         self.update4()
+
+        self.destroy()
         
          
 Interfaz()
