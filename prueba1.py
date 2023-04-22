@@ -3,6 +3,7 @@
 from datetime import datetime, timedelta
 import pesoGuia
 import pedimentoFunciones
+import facture
 # Variables del pedimento leídos, modificar los valores por los nuevos de json
 
 p_valorAduana = int(pedimentoFunciones.aduana())
@@ -33,7 +34,7 @@ t_iva = 0.16
 
 # Variables recuperadas de la factura
 
-f_numFactura = 'SAC2105'
+f_numFactura = str(facture.numFactura())
 
 # Variables recuperadas de la guía
 
