@@ -2,10 +2,12 @@
 # Importar las bibliotecas necesarias
 import pytesseract
 from PIL import Image, ImageFilter
-pytesseract.pytesseract.tesseract_cmd = r'D:\Documentos\Programas\tesseract\tesseract.exe'
-rutaImg = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg'
 
-def obtener_valor():
+def pesoGuia_pytess(rutaPytess):
+    pytesseract.pytesseract.tesseract_cmd = rutaPytess
+
+def obtener_valor(rutaImg):
+
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion = imagen.crop((1790,1228,1866,1303)) # coordenadas de la sección a recortar
@@ -24,10 +26,10 @@ def obtener_valor():
 
     return cadena_con_punto
 
-def obtener_guia():
+def obtener_guia(rutaImg):
 
         # Cargar la imagen y recortar la sección deseada
-    imagen = Image.open('D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg')
+    imagen = Image.open(rutaImg)
     # coordenadas de la sección a recortar
     seccion = imagen.crop((400, 500, 1200, 644))
     # 200,250,600,322

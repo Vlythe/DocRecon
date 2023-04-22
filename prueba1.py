@@ -10,16 +10,17 @@ rutaImgGuia = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hacka
 rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
 # Variables del pedimento leídos, modificar los valores por los nuevos de json
 
-p_valorAduana = int(pedimentoFunciones.aduana())
-p_tipoCambio = float(pedimentoFunciones.tipo_cambio())
-p_pesoBruto = float(pedimentoFunciones.peso_bruto())
-p_cvePedimento = str(pedimentoFunciones.cve_pedimento())
-p_dta = int(pedimentoFunciones.dta())
-p_iva = int(pedimentoFunciones.iva())
-p_fpIva = int(pedimentoFunciones.fp())
-p_numGuia = str(pedimentoFunciones.num_guia())
-p_stringFechaEnt = str(pedimentoFunciones.fecha_entrada())
-p_numFactura = str(pedimentoFunciones.num_factura())
+pedimentoFunciones.definir_rutas(rutaPytess)
+p_valorAduana = int(pedimentoFunciones.aduana(rutaImgPed))
+p_tipoCambio = float(pedimentoFunciones.tipo_cambio(rutaImgPed))
+p_pesoBruto = float(pedimentoFunciones.peso_bruto(rutaImgPed))
+p_cvePedimento = str(pedimentoFunciones.cve_pedimento(rutaImgPed))
+p_dta = int(pedimentoFunciones.dta(rutaImgPed))
+p_iva = int(pedimentoFunciones.iva(rutaImgPed))
+p_fpIva = int(pedimentoFunciones.fp(rutaImgPed))
+p_numGuia = str(pedimentoFunciones.num_guia(rutaImgPed))
+p_stringFechaEnt = str(pedimentoFunciones.fecha_entrada(rutaImgPed))
+p_numFactura = str(pedimentoFunciones.num_factura(rutaImgPed))
 
 # Variables que se van a calcular y comparar contra los leídos.
 
@@ -42,8 +43,8 @@ f_numFactura = str(facture.numFactura(rutaImgFact, rutaPytess))
 
 # Variables recuperadas de la guía
 
-g_numGuia = str(pesoGuia.obtener_guia())
-g_pesoBruto = float(pesoGuia.obtener_valor())
+g_numGuia = str(pesoGuia.obtener_guia(rutaImgGuia))
+g_pesoBruto = float(pesoGuia.obtener_valor(rutaImgGuia))
 
 # Variable booleana para verificar que no haya ningún error
 

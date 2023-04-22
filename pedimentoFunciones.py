@@ -1,13 +1,14 @@
 # Importar las bibliotecas necesarias
 import pytesseract
 from PIL import Image, ImageFilter
-pytesseract.pytesseract.tesseract_cmd = r'D:\Documentos\Programas\tesseract\tesseract.exe'
-rutaImg = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo pedimento censurado_page-0001.jpg'
 
-def tipo_cambio():
+def definir_rutas(rutaPytess):
+    pytesseract.pytesseract.tesseract_cmd = rutaPytess
+
+def tipo_cambio(rutaImg):
+    
     # Cargar la imagen y recortar la sección deseada
-    imagen = Image.open(
-        rutaImg)
+    imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((670,260, 900, 350)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
 
     # Convertir la sección a escala de grises y aplicar un filtro para mejorar la legibilidad del texto
@@ -19,7 +20,7 @@ def tipo_cambio():
 
     return texto
 
-def peso_bruto():
+def peso_bruto(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((1100,260, 1350, 350)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -29,7 +30,7 @@ def peso_bruto():
 
     return texto
 
-def num_guia():
+def num_guia(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((1380,1900, 2400, 2035)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -42,7 +43,7 @@ def num_guia():
 
     return texto
 
-def num_factura():
+def num_factura(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((0,1860, 500, 1900)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -58,7 +59,7 @@ def num_factura():
 
     return texto
 
-def iva():
+def iva(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((380,1430, 700, 1500)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -68,7 +69,7 @@ def iva():
 
     return texto
 
-def fp():
+def fp(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((340,1430, 600, 1500)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -78,7 +79,7 @@ def fp():
 
     return texto
 
-def fecha_entrada():
+def fecha_entrada(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((300,1100, 700, 1150)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -90,7 +91,7 @@ def fecha_entrada():
 
     return texto
 
-def dta():
+def dta(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((200,1400, 700, 1450)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -102,7 +103,7 @@ def dta():
 
     return texto
 
-def cve_pedimento():
+def cve_pedimento(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((1450,230, 1500, 280)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
@@ -118,7 +119,7 @@ def cve_pedimento():
 
     return texto
 
-def aduana():
+def aduana(rutaImg):
     # Cargar la imagen y recortar la sección deseada
     imagen = Image.open(rutaImg)
     seccion_cambio = imagen.crop((1200,380, 1770, 420)) # coordenadas de la sección a recortar - TIPO DE CAMBIO
