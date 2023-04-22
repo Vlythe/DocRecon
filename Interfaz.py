@@ -19,7 +19,6 @@ class Interfaz():
         self.pagina_inicio()
         self.root.mainloop()
 
-
     def update1(self):
         Tk().withdraw() 
         filename = askopenfilename() 
@@ -52,12 +51,12 @@ class Interfaz():
         resultados = principal.revisarDocs(rutaFact, rutaPed, rutaGuia)
         
         self.dato1.config(text="Tipo cambio: " + str(resultados["TIPO CAMBIO"]))
-        self.dato2.config(text="Peso bruto: " + str (resultados["PESO BRUTO"]))
+        self.dato2.config(text="Peso bruto: " + str(resultados["PESO BRUTO"]))
         self.dato3.config(text="DTA: " + str(resultados["DTA"]))
         self.dato4.config(text="IVA: " + str(resultados["IVA"]))
         self.dato5.config(text="F.P. IVA: " + str(resultados["F.P. IVA"]))
-        self.dato6.config(text="NUM GUIA: " + str (resultados["NUM GUIA"]))
-        self.dato7.config(text="NUM FACTURA: " + str (resultados["NUM FACTURA"]))
+        self.dato6.config(text="NUM GUIA: " + str(resultados["NUM GUIA"]))
+        self.dato7.config(text="NUM FACTURA: " + str(resultados["NUM FACTURA"]))
         
 
     def pagina_inicio(self):
@@ -141,32 +140,26 @@ class Interfaz():
         self.dato1 = tk.Label(self.root1, text="hola")
         self.dato1.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato1.place(x=200,y=0)
-
         
         self.dato2 = tk.Label(self.root1, text="hola")
         self.dato2.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato2.place(x=200,y=30)
-
         
         self.dato3 = tk.Label(self.root1, text="hola")
         self.dato3.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato3.place(x=200,y=60)
-
         
         self.dato4 = tk.Label(self.root1, text="hola")
         self.dato4.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato4.place(x=200,y=90)
-
         
         self.dato5 = tk.Label(self.root1, text="hola")
         self.dato5.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato5.place(x=200,y=120)
-
         
         self.dato6 = tk.Label(self.root1, text="hola")
         self.dato6.config(bg="#03002d",fg="white",font=("Inter",10))
         self.dato6.place(x=200,y=150)
-
 
         self.dato7 = tk.Label(self.root1, text="hola")
         self.dato7.config(bg="#03002d",fg="white",font=("Inter",10))
