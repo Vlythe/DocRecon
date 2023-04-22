@@ -3,142 +3,142 @@ import pesoGuia
 import pedimentoFunciones
 import facture
 
-# Rutas de imágenes
-rutaImgFact = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo factura - rotated_page-0001.jpg'
-rutaImgPed = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo pedimento censurado_page-0001.jpg'
-rutaImgGuia = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg'
-rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
-# Variables del pedimento leídos, modificar los valores por los nuevos de json
+def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia, rutaPytess):
 
-pedimentoFunciones.definir_rutas(rutaPytess)
-p_valorAduana = int(pedimentoFunciones.aduana(rutaImgPed))
-p_tipoCambio = float(pedimentoFunciones.tipo_cambio(rutaImgPed))
-p_pesoBruto = float(pedimentoFunciones.peso_bruto(rutaImgPed))
-p_cvePedimento = str(pedimentoFunciones.cve_pedimento(rutaImgPed))
-p_dta = int(pedimentoFunciones.dta(rutaImgPed))
-p_iva = int(pedimentoFunciones.iva(rutaImgPed))
-p_fpIva = int(pedimentoFunciones.fp(rutaImgPed))
-p_numGuia = str(pedimentoFunciones.num_guia(rutaImgPed))
-p_stringFechaEnt = str(pedimentoFunciones.fecha_entrada(rutaImgPed))
-p_numFactura = str(pedimentoFunciones.num_factura(rutaImgPed))
+    # Rutas de imágenes
+    # rutaImgFact = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo factura - rotated_page-0001.jpg'
+    # rutaImgPed = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo pedimento censurado_page-0001.jpg'
+    # rutaImgGuia = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg'
+    # rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
+    # Variables del pedimento leídos, modificar los valores por los nuevos de json
 
-# Variables que se van a calcular y comparar contra los leídos.
+    pedimentoFunciones.definir_rutas(rutaPytess)
+    p_valorAduana = int(pedimentoFunciones.aduana(rutaImgPed))
+    p_tipoCambio = float(pedimentoFunciones.tipo_cambio(rutaImgPed))
+    p_pesoBruto = float(pedimentoFunciones.peso_bruto(rutaImgPed))
+    p_cvePedimento = str(pedimentoFunciones.cve_pedimento(rutaImgPed))
+    p_dta = int(pedimentoFunciones.dta(rutaImgPed))
+    p_iva = int(pedimentoFunciones.iva(rutaImgPed))
+    p_fpIva = int(pedimentoFunciones.fp(rutaImgPed))
+    p_numGuia = str(pedimentoFunciones.num_guia(rutaImgPed))
+    p_stringFechaEnt = str(pedimentoFunciones.fecha_entrada(rutaImgPed))
+    p_numFactura = str(pedimentoFunciones.num_factura(rutaImgPed))
 
-p_fechaEnt = datetime.strptime(p_stringFechaEnt, "%d/%m/%Y")
-c_iva = 0
+    # Variables que se van a calcular y comparar contra los leídos.
 
-# Variables de tasas
+    p_fechaEnt = datetime.strptime(p_stringFechaEnt, "%d/%m/%Y")
+    c_iva = 0
 
-t_tipoCambio = {
-    datetime.strptime("13/09/2019", "%d/%m/%Y"):19.56612, 
-    datetime.strptime("17/09/2019", "%d/%m/%Y"):19.22310, 
-    datetime.strptime("18/09/2019", "%d/%m/%Y"):19.36650}
+    # Variables de tasas
 
-t_fraccionDTA = { 'I':0.008, 'II':0.00176, 'III': 331}
-t_iva = 0.16
+    t_tipoCambio = {
+        datetime.strptime("13/09/2019", "%d/%m/%Y"):19.56612, 
+        datetime.strptime("17/09/2019", "%d/%m/%Y"):19.22310, 
+        datetime.strptime("18/09/2019", "%d/%m/%Y"):19.36650}
 
-# Variables recuperadas de la factura
+    t_fraccionDTA = { 'I':0.008, 'II':0.00176, 'III': 331}
+    t_iva = 0.16
 
-f_numFactura = str(facture.numFactura(rutaImgFact, rutaPytess))
+    # Variables recuperadas de la factura
 
-# Variables recuperadas de la guía
+    f_numFactura = str(facture.numFactura(rutaImgFact, rutaPytess))
 
-g_numGuia = str(pesoGuia.obtener_guia(rutaImgGuia))
-g_pesoBruto = float(pesoGuia.obtener_valor(rutaImgGuia))
+    # Variables recuperadas de la guía
 
-# Diccionario de campos a evaluar
+    g_numGuia = str(pesoGuia.obtener_guia(rutaImgGuia))
+    g_pesoBruto = float(pesoGuia.obtener_valor(rutaImgGuia))
 
-resultados = {
+    # Diccionario de campos a evaluar
 
-    "TIPO CAMBIO": True,
-    "PESO BRUTO": True,
-    "DTA": True,
-    "IVA": True,
-    "F.P. IVA": True,
-    "NUM GUIA": True,
-    "NUM FACTURA": True
+    resultados = {
 
-}
+        "TIPO CAMBIO": True,
+        "PESO BRUTO": True,
+        "DTA": True,
+        "IVA": True,
+        "F.P. IVA": True,
+        "NUM GUIA": True,
+        "NUM FACTURA": True
+
+    }
 
 
-# Cálculos de DTA, IVA y FP de acuerdo a CVE PEDIMENTO
+    # Cálculos de DTA, IVA y FP de acuerdo a CVE PEDIMENTO
 
-if (p_cvePedimento == 'AF'):
+    if (p_cvePedimento == 'AF'):
 
-    if (p_valorAduana*t_fraccionDTA['II'])<t_fraccionDTA['III']:
-        c_dta=t_fraccionDTA['III']
-    else:
-        c_dta=round((p_valorAduana*t_fraccionDTA['II']), 0)
-    
-    c_fpIva = 21
+        if (p_valorAduana*t_fraccionDTA['II'])<t_fraccionDTA['III']:
+            c_dta=t_fraccionDTA['III']
+        else:
+            c_dta=round((p_valorAduana*t_fraccionDTA['II']), 0)
+        
+        c_fpIva = 21
 
-elif (p_cvePedimento == 'A1'):
+    elif (p_cvePedimento == 'A1'):
 
-    if ((p_valorAduana*t_fraccionDTA['I'])<t_fraccionDTA['III']):
-        c_dta=t_fraccionDTA['III']
-    else:
-        c_dta=round((p_valorAduana*t_fraccionDTA['I']),0)
+        if ((p_valorAduana*t_fraccionDTA['I'])<t_fraccionDTA['III']):
+            c_dta=t_fraccionDTA['III']
+        else:
+            c_dta=round((p_valorAduana*t_fraccionDTA['I']),0)
 
-    c_fpIva = 0
+        c_fpIva = 0
 
-c_iva = round(((c_dta+p_valorAduana)*t_iva),0)
+    c_iva = round(((c_dta+p_valorAduana)*t_iva),0)
 
-# Revisión de DTA
+    # Revisión de DTA
 
-if c_dta != p_dta:
-    print('Discrepancia: revisar DTA')
-    resultados["DTA"] = False
+    if c_dta != p_dta:
+        print('Discrepancia: revisar DTA')
+        resultados["DTA"] = False
 
-# Revisión de IVA calculado
+    # Revisión de IVA calculado
 
-if c_iva != p_iva:
-    print('Discrepancia: revisar IVA')
-    resultados["IVA"] = False
+    if c_iva != p_iva:
+        print('Discrepancia: revisar IVA')
+        resultados["IVA"] = False
 
-# Revisión de la forma de pago del IVA
+    # Revisión de la forma de pago del IVA
 
-if c_fpIva != p_fpIva:
-    print('Revisar F.P. del IVA')
-    resultados["F.P. IVA"] = False
+    if c_fpIva != p_fpIva:
+        print('Revisar F.P. del IVA')
+        resultados["F.P. IVA"] = False
 
-# Revisión del tipo de cambio utilizado
+    # Revisión del tipo de cambio utilizado
 
-if p_fechaEnt in t_tipoCambio:
-    if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
-              print('Revisar tipo de cambio.')
-              resultados["TIPO CAMBIO"] = False
+    if p_fechaEnt in t_tipoCambio:
+        if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
+                print('Revisar tipo de cambio.')
+                resultados["TIPO CAMBIO"] = False
 
-elif p_fechaEnt is not t_tipoCambio:
-    print(p_fechaEnt)
+    elif p_fechaEnt is not t_tipoCambio:
+        print(p_fechaEnt)
 
-    while p_fechaEnt is not t_tipoCambio:
-        p_fechaEnt -= timedelta(days=1)
+        while p_fechaEnt is not t_tipoCambio:
+            p_fechaEnt -= timedelta(days=1)
 
-        if p_fechaEnt in t_tipoCambio:
-         if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
-              resultados["TIPO CAMBIO"] = False
-       
-         break
+            if p_fechaEnt in t_tipoCambio:
+                if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
+                    resultados["TIPO CAMBIO"] = False
+        
+            break
 
-# Revisión de datos de factura
+    # Revisión de datos de factura
 
-if (f_numFactura != p_numFactura):
-    print('Discrepancia: revisar número de factura.')
-    resultados['NUM FACTURA']=False
+    if (f_numFactura != p_numFactura):
+        print('Discrepancia: revisar número de factura.')
+        resultados['NUM FACTURA']=False
 
-# Revisión de datos de guía
+    # Revisión de datos de guía
 
-if (g_numGuia != p_numGuia):
-    print('Discrepancia: revisar guia House.')
-    resultados['NUM GUIA']=False
+    if (g_numGuia != p_numGuia):
+        print('Discrepancia: revisar guia House.')
+        resultados['NUM GUIA']=False
 
-if (g_pesoBruto!=p_pesoBruto):
-    print('Discrepancia: revisar peso bruto.')
-    resultados['PESO BRUTO']=False
+    if (g_pesoBruto!=p_pesoBruto):
+        print('Discrepancia: revisar peso bruto.')
+        resultados['PESO BRUTO']=False
 
-for campo, valor in resultados.items():
-    if not valor:
-        print(campo, ":", valor)
+    return resultados
 
 
 
