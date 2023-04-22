@@ -1,9 +1,13 @@
-# Reglas para los campos a evaluar:
-
 from datetime import datetime, timedelta
 import pesoGuia
 import pedimentoFunciones
 import facture
+
+# Rutas de imágenes
+rutaImgFact = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo factura - rotated_page-0001.jpg'
+rutaImgPed = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo pedimento censurado_page-0001.jpg'
+rutaImgGuia = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg'
+rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
 # Variables del pedimento leídos, modificar los valores por los nuevos de json
 
 p_valorAduana = int(pedimentoFunciones.aduana())
@@ -34,7 +38,7 @@ t_iva = 0.16
 
 # Variables recuperadas de la factura
 
-f_numFactura = str(facture.numFactura())
+f_numFactura = str(facture.numFactura(rutaImgFact, rutaPytess))
 
 # Variables recuperadas de la guía
 
@@ -114,7 +118,7 @@ if (f_numFactura != p_numFactura):
 # Revisión de datos de guía
 
 if (g_numGuia != p_numGuia):
-    print('Discrepancia: revisar la guía House')
+    print('Discrepancia: revisar guia House.')
     todoOk = False
 
 if (g_pesoBruto!=p_pesoBruto):
@@ -123,6 +127,7 @@ if (g_pesoBruto!=p_pesoBruto):
 
 if todoOk:
     print('No hay errores encontrados.')
+
 
 
 
