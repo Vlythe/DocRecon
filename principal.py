@@ -3,7 +3,9 @@ import pesoGuia
 import pedimentoFunciones
 import facture
 
-def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia, rutaPytess):
+rutaPytess = rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
+
+def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia):
 
     # Variables del pedimento leídos
 
@@ -131,6 +133,7 @@ def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia, rutaPytess):
     if (g_pesoBruto!=p_pesoBruto):
         print('Discrepancia: revisar peso bruto.')
         resultados['PESO BRUTO']=False
+
 
     return resultados
 
