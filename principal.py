@@ -5,12 +5,7 @@ import facture
 
 def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia, rutaPytess):
 
-    # Rutas de imágenes
-    # rutaImgFact = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo factura - rotated_page-0001.jpg'
-    # rutaImgPed = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo pedimento censurado_page-0001.jpg'
-    # rutaImgGuia = 'D:\\Documentos\\Google Drive\\B_UAQ Software\\6to Semestre\\Hackathon\\Code Hackathon\\ejemplo guía_page-0001.jpg'
-    # rutaPytess = r'D:\Documentos\Programas\tesseract\tesseract.exe'
-    # Variables del pedimento leídos, modificar los valores por los nuevos de json
+    # Variables del pedimento leídos
 
     pedimentoFunciones.definir_rutas(rutaPytess)
     p_valorAduana = int(pedimentoFunciones.aduana(rutaImgPed))
@@ -61,7 +56,6 @@ def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia, rutaPytess):
         "NUM FACTURA": True
 
     }
-
 
     # Cálculos de DTA, IVA y FP de acuerdo a CVE PEDIMENTO
 
