@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter.filedialog import askopenfilename #framework para abrir el navegador
 import os
 import principal
+#import principal
 
 rutaPed = "null" 
 rutaGuia = "null"
@@ -15,10 +16,6 @@ class Interfaz():
 
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("300x400")
-        self.root.resizable(width=False, height=False)
-
-
         self.pagina_inicio()
         self.root.mainloop()
 
@@ -51,19 +48,23 @@ class Interfaz():
         print(name3)
 
     def update4(self):
-        resultados = {
 
-        "TIPO CAMBIO": True,
-        "PESO BRUTO": True,
-        "DTA": True,
-        "IVA": True,
-        "F.P. IVA": True,
-        "NUM GUIA": True,
-        "NUM FACTURA": True
-
-    }
+        resultados = principal.revisarDocs(rutaFact, rutaPed, rutaGuia)
+        
+        self.dato1.config(text="Tipo cambio: " + str(resultados["TIPO CAMBIO"]))
+        self.dato2.config(text="Peso bruto: " + str (resultados["PESO BRUTO"]))
+        self.dato3.config(text="DTA: " + str(resultados["DTA"]))
+        self.dato4.config(text="IVA: " + str(resultados["IVA"]))
+        self.dato5.config(text="F.P. IVA: " + str(resultados["F.P. IVA"]))
+        self.dato6.config(text="NUM GUIA: " + str (resultados["NUM GUIA"]))
+        self.dato7.config(text="NUM FACTURA: " + str (resultados["NUM FACTURA"]))
+        
 
     def pagina_inicio(self):
+
+        
+        self.root.geometry("300x400")
+        self.root.resizable(width=False, height=False)
 
         self.BgLabel = tk.Label(self.root)
         self.BgLabel.config(bg="#030030",width=300,height=8)
@@ -98,7 +99,7 @@ class Interfaz():
         self.Bsubir3.config(fg="white", bg= "#3d3d3d",font=("Inter",10),width=10,height=2)
         self.Bsubir3.place(x=190,y=300)
 
-        self.Bsubir4 = tk.Button(self.root,text="Siguiente", command=self.update4)
+        self.Bsubir4 = tk.Button(self.root,text="Siguiente", command=self.pagina_segunda)
         self.Bsubir4.config(fg="white", bg= "#3d3d3d",font=("Inter",10),width=10,height=1)
         self.Bsubir4.place(x=190,y=350)
 
@@ -113,8 +114,67 @@ class Interfaz():
         self.contenedor3 = tk.Label(self.root,text="Factura")
         self.contenedor3.config(bg="#B8B8B8",font=("Inter",10),width=20,height=2)
         self.contenedor3.place(x=20,y=300)
+
+    def pagina_segunda(self):
+
+        self.root1 = tk.Tk()
+        self.root1.geometry("500x300")
+        self.root1.resizable(width=False, height=False)
+        self.root.destroy()
         
+        self.barralateral = tk.Label(self.root1)
+        self.barralateral.config(bg="#ECECEC",width=25,height=30)
+        self.barralateral.place(x=0,y=0)
+
+        self.contenido = tk.Label(self.root1, text="")
+        self.contenido.config(bg="#03002d",fg="white",font=("Inter",10),width=50,height=30)
+        self.contenido.place(x=180,y=0)
+
+        self.text2 = tk.Label(self.root1,text="Verifica los resultados del análisis")
+        self.text2.config(bg="#ECECEC", font=("Inter",7),width=25,height=2)
+        self.text2.place(x=10,y=150)
+
+        self.text3 = tk.Label(self.root1,text=" Análisis \n Completo")
+        self.text3.config(bg="#ECECEC", font=("LEMON MILK",14),width=10,height=2)
+        self.text3.place(x=20,y=200)
+
+        self.dato1 = tk.Label(self.root1, text="hola")
+        self.dato1.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato1.place(x=200,y=0)
+
         
+        self.dato2 = tk.Label(self.root1, text="hola")
+        self.dato2.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato2.place(x=200,y=30)
+
+        
+        self.dato3 = tk.Label(self.root1, text="hola")
+        self.dato3.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato3.place(x=200,y=60)
+
+        
+        self.dato4 = tk.Label(self.root1, text="hola")
+        self.dato4.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato4.place(x=200,y=90)
+
+        
+        self.dato5 = tk.Label(self.root1, text="hola")
+        self.dato5.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato5.place(x=200,y=120)
+
+        
+        self.dato6 = tk.Label(self.root1, text="hola")
+        self.dato6.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato6.place(x=200,y=150)
+
+
+        self.dato7 = tk.Label(self.root1, text="hola")
+        self.dato7.config(bg="#03002d",fg="white",font=("Inter",10))
+        self.dato7.place(x=200,y=180)
+
+        self.update4()
+        
+         
 Interfaz()
     
 

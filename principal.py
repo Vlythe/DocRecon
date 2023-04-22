@@ -49,13 +49,13 @@ def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia):
 
     resultados = {
 
-        "TIPO CAMBIO": True,
-        "PESO BRUTO": True,
-        "DTA": True,
-        "IVA": True,
-        "F.P. IVA": True,
-        "NUM GUIA": True,
-        "NUM FACTURA": True
+        "TIPO CAMBIO": "OK",
+        "PESO BRUTO": "OK",
+        "DTA": "OK",
+        "IVA": "OK",
+        "F.P. IVA": "OK",
+        "NUM GUIA": "OK",
+        "NUM FACTURA": "OK"
 
     }
 
@@ -85,26 +85,26 @@ def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia):
 
     if c_dta != p_dta:
         print('Discrepancia: revisar DTA')
-        resultados["DTA"] = False
+        resultados["DTA"] = "Revisar"
 
     # Revisión de IVA calculado
 
     if c_iva != p_iva:
         print('Discrepancia: revisar IVA')
-        resultados["IVA"] = False
+        resultados["IVA"] = "Revisar"
 
     # Revisión de la forma de pago del IVA
 
     if c_fpIva != p_fpIva:
         print('Revisar F.P. del IVA')
-        resultados["F.P. IVA"] = False
+        resultados["F.P. IVA"] = "Revisar"
 
     # Revisión del tipo de cambio utilizado
 
     if p_fechaEnt in t_tipoCambio:
         if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
                 print('Revisar tipo de cambio.')
-                resultados["TIPO CAMBIO"] = False
+                resultados["TIPO CAMBIO"] = "Revisar"
 
     elif p_fechaEnt is not t_tipoCambio:
         print(p_fechaEnt)
@@ -114,25 +114,24 @@ def revisarDocs(rutaImgFact, rutaImgPed, rutaImgGuia):
 
             if p_fechaEnt in t_tipoCambio:
                 if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
-                    resultados["TIPO CAMBIO"] = False
-        
+                    resultados["TIPO CAMBIO"] = "Revisar"        
             break
 
     # Revisión de datos de factura
 
     if (f_numFactura != p_numFactura):
         print('Discrepancia: revisar número de factura.')
-        resultados['NUM FACTURA']=False
+        resultados['NUM FACTURA']="Revisar"
 
     # Revisión de datos de guía
 
     if (g_numGuia != p_numGuia):
         print('Discrepancia: revisar guia House.')
-        resultados['NUM GUIA']=False
+        resultados['NUM GUIA']="Revisar"
 
     if (g_pesoBruto!=p_pesoBruto):
         print('Discrepancia: revisar peso bruto.')
-        resultados['PESO BRUTO']=False
+        resultados['PESO BRUTO']="Revisar"
 
 
     return resultados
