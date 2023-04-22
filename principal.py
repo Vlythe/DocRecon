@@ -46,9 +46,20 @@ f_numFactura = str(facture.numFactura(rutaImgFact, rutaPytess))
 g_numGuia = str(pesoGuia.obtener_guia(rutaImgGuia))
 g_pesoBruto = float(pesoGuia.obtener_valor(rutaImgGuia))
 
-# Variable booleana para verificar que no haya ningún error
+# Diccionario de campos a evaluar
 
-todoOk = True
+resultados = {
+
+    "TIPO CAMBIO": True,
+    "PESO BRUTO": True,
+    "DTA": True,
+    "IVA": True,
+    "F.P. IVA": True,
+    "NUM GUIA": True,
+    "NUM FACTURA": True
+
+}
+
 
 # Cálculos de DTA, IVA y FP de acuerdo a CVE PEDIMENTO
 
@@ -76,26 +87,26 @@ c_iva = round(((c_dta+p_valorAduana)*t_iva),0)
 
 if c_dta != p_dta:
     print('Discrepancia: revisar DTA')
-    todoOk = False
+    resultados["DTA"] = False
 
 # Revisión de IVA calculado
 
 if c_iva != p_iva:
     print('Discrepancia: revisar IVA')
-    todoOk = False
+    resultados["IVA"] = False
 
 # Revisión de la forma de pago del IVA
 
 if c_fpIva != p_fpIva:
     print('Revisar F.P. del IVA')
-    todoOk = False
+    resultados["F.P. IVA"] = False
 
 # Revisión del tipo de cambio utilizado
 
 if p_fechaEnt in t_tipoCambio:
     if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
               print('Revisar tipo de cambio.')
-              todoOk = False
+              resultados["TIPO CAMBIO"] = False
 
 elif p_fechaEnt is not t_tipoCambio:
     print(p_fechaEnt)
@@ -105,8 +116,7 @@ elif p_fechaEnt is not t_tipoCambio:
 
         if p_fechaEnt in t_tipoCambio:
          if p_tipoCambio != t_tipoCambio[p_fechaEnt]:
-              print('Revisar tipo de cambio.')
-              todoOk = False
+              resultados["TIPO CAMBIO"] = False
        
          break
 
@@ -114,20 +124,21 @@ elif p_fechaEnt is not t_tipoCambio:
 
 if (f_numFactura != p_numFactura):
     print('Discrepancia: revisar número de factura.')
-    todoOk = False
+    resultados['NUM FACTURA']=False
 
 # Revisión de datos de guía
 
 if (g_numGuia != p_numGuia):
     print('Discrepancia: revisar guia House.')
-    todoOk = False
+    resultados['NUM GUIA']=False
 
 if (g_pesoBruto!=p_pesoBruto):
     print('Discrepancia: revisar peso bruto.')
-    todoOk = False
+    resultados['PESO BRUTO']=False
 
-if todoOk:
-    print('No hay errores encontrados.')
+for campo, valor in resultados.items():
+    if not valor:
+        print(campo, ":", valor)
 
 
 
